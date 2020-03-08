@@ -1,4 +1,4 @@
-#!/home/allan/Documents/moringa-projects/django-projects/virtual/bin/python
+#!/home/allan/Documents/moringa-projects/django-projects/virtual/bin/python3.7
 # -*- coding: utf-8 -*-
 import re
 import sys
