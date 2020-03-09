@@ -1,0 +1,81 @@
+from django.contrib.auth.forms import(
+    AuthenticationForm,
+    PasswordChangeForm,
+)
+from django import forms
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit
+
+from accounts.models import User
+
+class UserCreationForm(forms.ModelForm):
+    password1 = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput
+    )
+    password2 = forms.CharField(
+        label='Password confirmation',
+        widget=forms.PasswordInput
+    )
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'email',
+            'name',
+        )
+
+class SignUpForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'username',
+            'email',
+            'password1',
+            'password2',
+            Submit('signup', 'Sign up', css_class='btn primary')
+        )
+
+
+class UpdateAccountForm(UserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(UpdateAccountForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'username',
+            'email',
+            'name',
+            Submit('update', 'Update Account', css_class='btn primary')
+        )
+
+
+class ChangePasswordForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs['initial']['user']
+        super(ChangePasswordForm, self).__init__(user, *args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'old_password',
+            'new_password1',
+            'new_password2',
+            Submit('update', 'Update Password', css_class='btn primary')
+        )
+
+
+class LoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'username',
+            'password',
+            Submit('login', 'Login', css_class='btn-primary')
+        )
+
