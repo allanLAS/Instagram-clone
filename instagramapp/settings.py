@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '*v5u!cdl!3u-11ns)3zz+4wg6l!hub9km(uq4b$y77$ys46a+g'
 
-AUTH_USER_MODEL = 'accounts.User'
+# AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_URL = '/u/login'
 LOGIN_REDIRECT_URL = '/u/login'

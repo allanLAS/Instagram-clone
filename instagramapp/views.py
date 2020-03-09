@@ -1,5 +1,5 @@
 from django.views import generic
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 from posts.models import Post 
