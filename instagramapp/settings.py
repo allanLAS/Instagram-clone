@@ -36,14 +36,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'bootstrap4'
+    'accounts',
+    'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
     'posts',
 ]
 
@@ -136,20 +136,20 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-if os.getenv('PRODUCTION') is True:
-    DEBUG = False
+# if os.getenv('PRODUCTION') is True:
+#     DEBUG = False
 
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
+#     import dj_database_url
+#     DATABASES['default'] = dj_database_url.config()
 
-    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    ALLOWED_HOSTS = ['.herokuapp.com']
-    STATIC_ROOT = 'staticfiles'
-else:
-    INSTALLED_APPS += (
-        'debug_toolbar',
-    )
+#     ALLOWED_HOSTS = ['.herokuapp.com']
+#     STATIC_ROOT = 'staticfiles'
+# else:
+#     INSTALLED_APPS += (
+#         'debug_toolbar',
+#     )
