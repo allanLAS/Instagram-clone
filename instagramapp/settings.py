@@ -63,7 +63,7 @@ ROOT_URLCONF = 'instagramapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,7 +85,9 @@ WSGI_APPLICATION = 'instagramapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'instagram',
+        'USER': 'allan',
+    'PASSWORD': '1234',
     }
 }
 
@@ -114,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -133,3 +135,21 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+if os.getenv('PRODUCTION') is True:
+    DEBUG = False
+
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    ALLOWED_HOSTS = ['.herokuapp.com']
+    STATIC_ROOT = 'staticfiles'
+else:
+    INSTALLED_APPS += (
+        'debug_toolbar',
+    )
